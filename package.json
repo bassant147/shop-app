@@ -1,0 +1,22 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bassant147/shop-app.git"
+  },
+  "author": "bassant abdelgawad",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bassant147/shop-app/issues"
+  },
+  "homepage": "https://github.com/bassant147/shop-app#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
