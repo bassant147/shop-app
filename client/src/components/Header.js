@@ -1,19 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Header = () => {
+class Header extends React.Component {
+ render() {
   return (
-    <div className="ui pointing secondary menu">
-      <Link to="/" className="item">Home</Link>
-      <div className="right menu">
-        <Link to="/login" className="item">
-          login
+    <nav>
+      <div className="nav-wrapper">
+        <Link to="/" className="left brand-logo">
+          shop
         </Link>
+        <ul className="right">
+          <li>
+            <Link to="/login">Login</Link>
+          </li>
+        </ul>
       </div>
-
-    </div>
+    </nav>
   );
 }
-
+}
 export default Header;
 
