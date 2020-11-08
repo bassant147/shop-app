@@ -1,11 +1,10 @@
 import React from 'react';
 
-class Form extends React.Component {
-  state = { fname: '', lname: '', phone: '', address: '', email: '', username: '', password: '' }
+class SignupForm extends React.Component {
+  state = { fname: '', lname: '', phone: '', email: '', username: '', password: '', passwordConfirm: '' }
 
   onFormSubmit = (event) => {
     event.preventDefault();
-    console.log('form submitted');
     this.props.onSubmit(this.state);
   }  
 
@@ -46,7 +45,7 @@ class Form extends React.Component {
             </div>
             <div className="row">
               <div className="input-field col s6">
-                <input placeholder="Home Address" id="address" type="text" value={this.state.address} onChange={e => this.setState({ address: e.target.value })} />
+                <input placeholder="Password Confirmation" id="passwordConfirm" type="password" value={this.state.passwordConfirm} onChange={e => this.setState({ passwordConfirm: e.target.value })} />
               </div>
             </div>
             <div className="row">
@@ -61,4 +60,4 @@ class Form extends React.Component {
   }
 }
 
-export default Form;
+export default SignupForm;

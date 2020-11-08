@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 class Header extends React.Component {
@@ -19,5 +20,10 @@ class Header extends React.Component {
   );
 }
 }
-export default Header;
+
+const mapStateToProps = (state) => {
+  return { user: state.user }
+}
+
+export default connect(mapStateToProps)(Header);
 

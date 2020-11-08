@@ -5,7 +5,7 @@ import * as actions from '../actions';
 
 import Header from './Header';
 import ProductList from './routes/ProductList';
-import Login from './routes/Login';
+import Signup from './routes/Signup';
 import PurchaseHistory from './routes/PurchaseHistory';
 import Cart from './routes/Cart';
 import WishList from './routes/WishList';
@@ -22,7 +22,7 @@ class App extends React.Component {
           <div>
             <Header/>
             <Route path="/" exact component={ProductList}/>
-            <Route path="/login" component={Login}/>
+            <Route path="/signup" component={Signup}/>
             <Route path="/purchase-history" component={PurchaseHistory}/>
             <Route path="/cart" component={Cart}/>
             <Route path="/wishlist" component={WishList}/>
