@@ -62,4 +62,6 @@ exports.login = async (req, res) => {
   req.session.userId = existingUser[0].user_id;
   console.log('user logged in and the id is....')
   console.log(req.session.userId);
+
+  return res.send((req.session.userId).toString());
 }

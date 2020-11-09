@@ -1,23 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {logout} from '../../actions';
+import { signOut } from '../../actions';
 
 class Logout extends React.Component {
   componentDidUpdate() {
     console.log('inside logout comp');
-    console.log(this.props.auth);
-    console.log(this.props.user);
-    this.props.logout(this.props.user);
+    this.props.signOut();
   }
 
   render() {
     return <div></div>
   }
 } 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user,
-    auth: state.auth}
-}
 
-export default connect(mapStateToProps, {logout})(Logout); 
+export default connect(null, {signOut})(Logout); 

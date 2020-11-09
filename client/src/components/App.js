@@ -23,6 +23,7 @@ class App extends React.Component {
         <BrowserRouter>          
           <div>            
             <Header/>
+            {this.props.isSignedIn}
             <Route path="/" exact component={ProductList}/>
             <Route path="/signup" component={Signup}/>
             <Route path="/login" component={Login}/>
@@ -38,7 +39,9 @@ class App extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    isSignedIn: state.isSignedIn
+  };
 }
 
 export default connect(mapStateToProps, actions)(App);

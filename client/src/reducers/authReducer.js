@@ -1,15 +1,16 @@
-import { FETCH_USER, CHECK_USER, LOGOUT } from "../actions/types";
+import { SIGN_IN, SIGN_OUT } from "../actions/types";
 
-const authReducer = (state = null, action) => {
+const INITIAL_STATE = {
+  isSignedIn: false
+}
+
+const authReducer = (state = INITIAL_STATE, action) => {
   console.log(action);
   switch(action.type) {
-    case FETCH_USER:
-      // if the user is not logged in, it returns false instead of empty string
-      return action.payload || false;
-    case CHECK_USER:
-      return action.payload || false;
-    case LOGOUT:
-      return false;
+    case SIGN_IN:
+      return { ...state, isSignedIn: true, userId: action.payload};
+    case SIGN_OUT:
+      return { ...state, isSignedIn: false, userId: null};
     default:
       return state;
   }
