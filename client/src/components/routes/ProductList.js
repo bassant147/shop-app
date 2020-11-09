@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { withRouter } from 'react-router-dom';
 
 const ProductList = () => {
 
@@ -10,4 +10,4 @@ const ProductList = () => {
   );
 }
 
-export default ProductList;
+export default withRouter(ProductList);

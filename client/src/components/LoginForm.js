@@ -1,4 +1,5 @@
 import React from 'react';
+//import { Field, reduxForm } from 'redux-form';
 
 class LoginForm extends React.Component {
   state = { email: '', password: '' }
@@ -7,6 +8,24 @@ class LoginForm extends React.Component {
     event.preventDefault();
     this.props.onSubmit(this.state);
   }  
+
+  /* renderInput({ input, label}) {
+    return (
+      <div className="field">
+        <label>{label}</label>
+        <input {...input}/>
+      </div>
+    )
+  }
+
+  render() {
+    return (
+      <form>
+        <Field name="email" component={this.renderInput} label="Email" className="validate" type="email"/>
+        <Field name="password" component={this.renderInput} label="Password" className="validate" type="password"/>
+      </form>
+    )
+  } */
 
   render() {
     return (
@@ -25,14 +44,20 @@ class LoginForm extends React.Component {
               </div>
             </div>
             <div className="row">
-              <button className="btn waves-effect waves-light right" type="submit" name="action">Submit
-                <i className="material-icons right">send</i>
-              </button>
+              
+                <button className="btn waves-effect waves-light right" type="submit" name="action">
+                  Submit
+                </button>
+             
             </div>
           </form>
         </div>
     )
-  }
+  } 
 }
+
+/* export default reduxForm({
+  form: 'loginForm'
+})(LoginForm); */
 
 export default LoginForm;

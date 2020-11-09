@@ -6,6 +6,8 @@ import { createUser } from '../../actions';
 class Signup extends React.Component {
   // function that handles data coming from the form component
   onFormSubmit = (formData) => {
+    console.log('--signup.js--');
+    console.log(formData);
     this.props.createUser(formData);
   }
 

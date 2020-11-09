@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from "react-router-dom";
 import Form from '../LoginForm';
 import { signIn, checkUser, fetchUser } from '../../actions';
 
@@ -13,13 +14,12 @@ class Login extends React.Component {
     console.log('Login Comp: returned from fetchUser')
     this.props.signIn(this.props.userId);
     console.log('Login Comp: returned from signIn')
+    this.props.history.push("/");
   }
 
   render() {
-    return (
-      <div>
-        <Form onSubmit={this.onFormSubmit}/>
-      </div>
+    return (      
+      <Form onSubmit={this.onFormSubmit}/>
     );
   }
 }
@@ -31,4 +31,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, {signIn, checkUser, fetchUser})(Login);
+export default withRouter(connect(mapStateToProps, {signIn, checkUser, fetchUser})(Login));

@@ -1,15 +1,46 @@
 import React from 'react';
+//import { Field, reduxForm } from 'redux-form';
 
 class SignupForm extends React.Component {
   state = { fname: '', lname: '', phone: '', email: '', username: '', password: '', passwordConfirm: '' }
 
-  onFormSubmit = (event) => {
+   onFormSubmit = (event) => {
     event.preventDefault();
     this.props.onSubmit(this.state);
   }  
 
+  /* onFormSubmit(formValues) {
+    this.props.onSubmit(formValues);
+  }
+
+  renderField({input, label}) {
+    return (
+      <div className="field">
+        <label>{label}</label>
+        <input {...input} />
+      </div>
+    )
+  }
+
   render() {
     return (
+      <form onSubmit={this.props.handleSubmit(this.onFormSubmit)}>
+        <Field name="fname" component={this.renderField} label="First Name" className="validate" type="text"/>
+        <Field name="lname" component={this.renderField} label="Last Name" className="validate" type="text"/>
+        <Field name="phone" component={this.renderField} label="Phone Number" className="validate" />
+        <Field name="email" component={this.renderField} label="Email" className="validate" type="email"/>
+        <Field name="username" component={this.renderField} label="Username" className="validate" type="text"/>
+        <Field name="password" component={this.renderField} label="Password" className="validate" type="password"/>
+        <Field name="passwordConfirm" component={this.renderField} label="Password Confirmation" className="validate" type="password"/>
+        <div className="row">
+          <button className="btn waves-effect waves-light right" type="submit" name="action">
+            Submit              
+          </button>
+        </div>
+      </form>
+    ); */
+    render(){
+       return (
       <div>
         <div className="row">
           <form onSubmit={this.onFormSubmit} className="col s12">
@@ -56,8 +87,12 @@ class SignupForm extends React.Component {
           </form>
         </div>
       </div>
-    );
+    ); 
   }
 }
+
+/* export default reduxForm({
+  form: 'signupForm'
+})(SignupForm); */
 
 export default SignupForm;

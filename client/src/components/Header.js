@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { signOut } from '../actions';
 
 class Header extends React.Component {
   renderContent() {
@@ -15,7 +16,7 @@ class Header extends React.Component {
               <Link to="/cart">Cart</Link>
             </li>
             <li>
-              <Link to="/logout">Logout</Link>
+              <Link to="/" onClick={this.props.signOut}>Logout</Link>
             </li>
           </ul>
         );
@@ -52,5 +53,5 @@ const mapStateToProps = (state) => {
   return { isSignedIn: state.auth.isSignedIn }
 }
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, {signOut})(Header);
 

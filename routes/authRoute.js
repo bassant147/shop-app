@@ -26,7 +26,8 @@ router
 router
   .route('/current_user')
   .get((req, res) => {
-    res.send(req.session.userId.toString());
+    if(req.session.userId) res.send(req.session.userId.toString());
+    else res.json({})
   });
 
 module.exports = router;
