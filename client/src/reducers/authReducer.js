@@ -1,4 +1,4 @@
-import { FETCH_USER} from "../actions/types";
+import { FETCH_USER, CHECK_USER, LOGOUT } from "../actions/types";
 
 const authReducer = (state = null, action) => {
   console.log(action);
@@ -6,6 +6,10 @@ const authReducer = (state = null, action) => {
     case FETCH_USER:
       // if the user is not logged in, it returns false instead of empty string
       return action.payload || false;
+    case CHECK_USER:
+      return action.payload || false;
+    case LOGOUT:
+      return false;
     default:
       return state;
   }

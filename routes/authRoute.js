@@ -8,11 +8,20 @@ router
   .post(authController.signup)
 
 router
+  .route('/login')
+  .post(authController.login)
+  
+router
   .route('/logout')
   .get((req, res) => {
-    req.logout();
+    console.log('req.session.userId');
+    console.log(req.session.userId);
+    console.log('user logged out');
+    req.session.userId = null;
+    console.log('req.session.userId');
+    console.log(req.session.userId);
     res.redirect('/');
-  });
+  })
 
 router
   .route('/current_user')
