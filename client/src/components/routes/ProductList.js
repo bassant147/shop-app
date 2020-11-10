@@ -1,9 +1,7 @@
-import './ProductLayout.css';
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { fetchAllProducts } from '../../actions';
-import ProductCard from './ProductCard';
 
 class ProductList extends React.Component {
   componentDidMount() {
@@ -15,14 +13,26 @@ class ProductList extends React.Component {
     if(this.props.products) {
       const result = Array.from(this.props.products);
       return result.map(product => {
-        return <ProductCard key={product.product_id} product={product} />;
-      })
-    }
+        return (
+          <div class="col s12 m4">
+            <div class="card">
+              <div class="card-image">
+                <img src={product.img_url}/>
+                <span class="card-title">{product.product_name} - {product.price} egp</span>
+              </div>
+              <div class="card-action">
+                <a href="#">This is a link</a>
+              </div>
+            </div>
+          </div>
+      );
+    })
   }
+}
 
   render() {
     return (
-      <div className="product-list">
+      <div className="row">
         {this.renderedProducts()}
       </div>
     );
