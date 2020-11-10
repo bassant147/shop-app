@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
 
@@ -9,6 +10,7 @@ const userRouter = require('./routes/userRoutes');
 const app = express();
 
 app.use(bodyParser.json());
+app.use(cors({}));
 app.use(cookieSession({ keys: ['nvlsnvljfdbvljddabvlkhfb']}));
 app.use('/api/products/', productRouter);
 app.use('/api/users/', userRouter);

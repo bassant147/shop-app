@@ -1,9 +1,13 @@
 const db = require('./db');
 
 exports.getAllProductsDB = () => {
-  let sql = 'SELECT * FROM shopdb.products;';
-  db.query(sql, (err, results) => {
-    if(err) throw err;
-    console.log(results);
+  return new Promise( (resolve, reject) => {
+    let sql = 'SELECT * FROM shopdb.products;';
+    db.query(sql, (err, results) => {
+      if(err) {
+        reject(err);
+      }
+      return resolve(results);
+    })
   })
 }
