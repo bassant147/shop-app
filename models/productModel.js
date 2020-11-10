@@ -11,3 +11,9 @@ exports.getAllProductsDB = () => {
     })
   })
 }
+
+exports.addToCart = () => {
+  return new Promise ((resolve, reject) => {
+    //let sql = 
+  })
+}

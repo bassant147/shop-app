@@ -10,7 +10,9 @@ router
 
 router
   .route('/:id')
-  .get(userController.getUser);
+  .get(userController.getUser)
+//  .get(userController.getCart)
+//  .get(userController.getWishList)
   
 
 router

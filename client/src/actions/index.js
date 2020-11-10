@@ -27,13 +27,20 @@ export const checkUser = (user) => async dispatch => {
   dispatch({ type: CHECK_USER, payload: userId.data});    
 } 
 
-export const createUser = (user) => {
+/* export const createUser = (user) => {
+  console.log('from actions')
+  console.log(user)
   axios.post('/auth/signup', user);
   return {
     type: CREATE_USER,
     payload: user
   }
-}
+} */
+
+export const createUser = (user) => async dispatch => {
+  await axios.post('/auth/signup', user);
+  dispatch({ type: CREATE_USER, payload: user});
+} 
 
 export const fetchAllProducts = () => async dispatch => {
   const products = await axios.get('/api/products/');

@@ -3,6 +3,8 @@ import { CREATE_USER, FETCH_USER, CHECK_USER } from '../actions/types';
 const createUser = (state = {}, action) => {
   switch(action.type) {
     case CREATE_USER:
+      console.log('from user reducer')
+      console.log(action.payload)
       return action.payload;      
     case FETCH_USER:
       // if the user is not logged in, it returns false instead of empty string

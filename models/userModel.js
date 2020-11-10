@@ -30,13 +30,12 @@ exports.getUserByIdDB = (id) => {
 exports.getUserByEmailDB = (email) => {
   let sql = `SELECT * FROM shopdb.users WHERE email = ?`
   return new Promise( (resolve, reject) => {
-    db.query(sql, email, (err, user) => {
+    db.query(sql, email, (err, results) => {
       if(err) {
         console.log('Promise rejected in getUserByEmailDB')
         reject(err);
       }
-
-      return resolve(user);
+      return resolve(results[0]);
     })
   })
 }

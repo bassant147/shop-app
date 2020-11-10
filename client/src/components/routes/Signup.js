@@ -1,14 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from "react-router-dom";
 import Form from '../SignupForm';
-import { createUser } from '../../actions';
+import { createUser, signIn } from '../../actions';
 
 class Signup extends React.Component {
   // function that handles data coming from the form component
-  onFormSubmit = (formData) => {
-    console.log('--signup.js--');
-    console.log(formData);
-    this.props.createUser(formData);
+  onFormSubmit = async (formData) => {
+    await this.props.createUser(formData);
+    this.props.signIn(this.props.userId);
+    this.props.history.push("/");
   }
 
   render() {
@@ -20,4 +21,4 @@ class Signup extends React.Component {
   }
 }
 
-export default connect(null, { createUser })(Signup);
+export default withRouter(connect(null, { createUser, signIn })(Signup));

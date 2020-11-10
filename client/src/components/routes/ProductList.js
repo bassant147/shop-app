@@ -1,27 +1,38 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import { fetchAllProducts } from '../../actions';
+import { withRouter, Link } from 'react-router-dom';
+import { fetchAllProducts, fetchUser } from '../../actions';
 
 class ProductList extends React.Component {
   componentDidMount() {
     this.props.fetchAllProducts();
-    console.log('productlist');
   }
+
+   /* isLoggedIn = () => {
+    this.props.fetchUser().then( loggedIn => {
+      if(!loggedIn) return <Link to = '/login' /> 
+    }
+    ) 
+    console.log('fetchhh')
+    console.log(this.props.fetchUser());
+    
+  } */
 
   renderedProducts() {
     if(this.props.products) {
       const result = Array.from(this.props.products);
       return result.map(product => {
         return (
-          <div class="col s12 m4">
-            <div class="card">
-              <div class="card-image">
+          <div className="col s12 m4" key={product.product_id}>
+            <div className="card">
+              <div className="card-image" >
                 <img src={product.img_url}/>
-                <span class="card-title">{product.product_name} - {product.price} egp</span>
+                <span className="card-title" style={{"fontFamily": "lato" , "textShadow": "2px 2px 2px #000"}}>{product.product_name}</span>
               </div>
-              <div class="card-action">
-                <a href="#">This is a link</a>
+              <div className="card-action">
+                <a href='#'><i className="material-icons">add_shopping_cart</i></a>
+                <a href='#'><i className="material-icons">favorite_border</i></a>
+                <span className="right grey-text text-darken-2">{product.price} egp</span>
               </div>
             </div>
           </div>
@@ -46,5 +57,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-//export default withRouter(connect(null, { fetchAllProducts })(ProductList));
-export default withRouter(connect(mapStateToProps, { fetchAllProducts })(ProductList));
+export default withRouter(connect(mapStateToProps, { fetchAllProducts, fetchUser })(ProductList));
