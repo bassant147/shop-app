@@ -22,11 +22,17 @@ exports.getUser = async (req, res) => {
   return res.send(user);
 }
 
-exports.getAllUsers = (req, res) => {
-
-}
-
 exports.getCurrentUser = (req, res) => {
   console.log(req);
   res.send(req);
+}
+
+exports.getCart = async (req, res) => {
+  console.log('getcart: req.session.userId')
+  console.log(req.session.userId)
+  let cart = await User.getCartDB(req.session.userId)
+  cart = cart.map(row => Object.assign({}, row));
+  console.log('cart' );
+  console.log(cart)
+  return res.send(cart);
 }

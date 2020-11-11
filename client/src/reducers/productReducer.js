@@ -1,4 +1,4 @@
-import { ADD_TO_CART, FETCH_PRODUCTS } from '../actions/types';
+import { ADD_TO_CART, FETCH_PRODUCTS} from '../actions/types';
 
 const productReducer = (state = {}, action) => {
   switch(action.type) {

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SIGN_IN, SIGN_OUT,FETCH_USER, CREATE_USER, CHECK_USER, FETCH_PRODUCTS, ADD_TO_CART } from './types';
+import { SIGN_IN, SIGN_OUT,FETCH_USER, CREATE_USER, CHECK_USER, FETCH_PRODUCTS, ADD_TO_CART, GET_CART } from './types';
 
 // User Action Creators
 export const signIn = (userId) => {
@@ -48,6 +48,16 @@ export const fetchAllProducts = () => async dispatch => {
 }
 
 export const addToCart = (userId, productId) => async dispatch => {
-  const cart = await axios.post('/api/products', {userId, productId});
-  dispatch({ type: ADD_TO_CART, payload: cart});
+  if(userId) {
+    await axios.post('/api/products', {userId, productId});
+    dispatch({ type: ADD_TO_CART});
+  }
+}
+
+export const getCart = () => async dispatch => {
+  
+    const cart = await axios.get('/api/users')
+    console.log('getcart action')
+    console.log(cart)
+    dispatch({ type: GET_CART, payload: cart.data});
 }

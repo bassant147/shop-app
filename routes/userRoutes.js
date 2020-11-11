@@ -5,13 +5,13 @@ const router = express.Router();
 
 router
   .route('/')
-  .get(userController.getAllUsers)
+  .get(userController.getCart)
  // .post(userController.createUser);    
 
 router
   .route('/:id')
   .get(userController.getUser)
-//  .get(userController.getCart)
+//  
 //  .get(userController.getWishList)
   
 

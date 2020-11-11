@@ -60,7 +60,6 @@ exports.login = async (req, res) => {
     console.log('Invalid Password');
     return res.send('Invalid Password');
   } 
-  console.log('user logged in and the id is....')
   req.session.userId = existingUser.user_id;
   console.log('user logged in and the id is....')
   console.log(req.session.userId);

@@ -40,6 +40,16 @@ exports.getUserByEmailDB = (email) => {
   })
 }
 
-exports.getAllUsersDB = () => {
-  
+exports.getCartDB = (userId) => {
+  return new Promise ((resolve, reject) => {
+    //let sql = `SELECT * FROM shopdb.cart WHERE user_id = ${userId};`
+    let sql = `SELECT product_name, price, img_url FROM shopdb.products 
+    WHERE product_id IN (
+              SELECT product_id FROM shopdb.cart WHERE user_id = ${userId}
+            );`
+    db.query(sql, (err, results) => {
+      if(err) reject(err);
+      resolve(results);
+    })
+  });
 }
