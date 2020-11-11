@@ -6,8 +6,10 @@ exports.getAllProducts = async (req, res) => {
   res.send(products);
 }
 
-exports.addToCart = (req, res) => {
-  
+exports.addToCart = async (req, res) => {
+  console.log('add to cart')
+  console.log(req.body)
+  //let cart = await Product.addToCartDB();
 }
 
 exports.getProduct = (req, res) => {

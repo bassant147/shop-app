@@ -53,8 +53,7 @@ exports.login = async (req, res) => {
     console.log('email not found');
     return res.send('email not found');
   } 
-  
-  const savedPassword = existingUser[0].user_password;
+  const savedPassword = existingUser.user_password;
   const suppliedPassword = user.password;
   const validPassword = comparePasswords(savedPassword, suppliedPassword);
   if(!validPassword) {
@@ -62,7 +61,7 @@ exports.login = async (req, res) => {
     return res.send('Invalid Password');
   } 
   console.log('user logged in and the id is....')
-  req.session.userId = existingUser[0].user_id;
+  req.session.userId = existingUser.user_id;
   console.log('user logged in and the id is....')
   console.log(req.session.userId);
 

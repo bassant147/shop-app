@@ -12,7 +12,7 @@ exports.getAllProductsDB = () => {
   })
 }
 
-exports.addToCart = () => {
+exports.addToCartDB = () => {
   return new Promise ((resolve, reject) => {
     //let sql = 
   })

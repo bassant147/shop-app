@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SIGN_IN, SIGN_OUT,FETCH_USER, CREATE_USER, CHECK_USER, FETCH_PRODUCTS } from './types';
+import { SIGN_IN, SIGN_OUT,FETCH_USER, CREATE_USER, CHECK_USER, FETCH_PRODUCTS, ADD_TO_CART } from './types';
 
 // User Action Creators
 export const signIn = (userId) => {
@@ -45,4 +45,9 @@ export const createUser = (user) => async dispatch => {
 export const fetchAllProducts = () => async dispatch => {
   const products = await axios.get('/api/products/');
   dispatch({ type: FETCH_PRODUCTS, payload: products});
+}
+
+export const addToCart = (userId, productId) => async dispatch => {
+  const cart = await axios.post('/api/products', {userId, productId});
+  dispatch({ type: ADD_TO_CART, payload: cart});
 }

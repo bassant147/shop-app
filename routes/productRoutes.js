@@ -5,13 +5,14 @@ const router = express.Router();
 
 router
   .route('/')
-  .get(productController.getAllProducts);
+  .get(productController.getAllProducts)
+  .post(productController.addToCart)
 
 router
   .route('/:id')
-  .get(productController.getProduct)
-  .post(productController.createProduct)
- // .post(productController.addToCart)
+//  .get(productController.getProduct)
+//  .post(productController.createProduct)
+//  .post(productController.addToCart)
  // .post(productController.addToWishlist)
 
 module.exports = router;
