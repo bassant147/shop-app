@@ -26,8 +26,6 @@ const productAlreadyInCart = (userId, productId) => {
 
 exports.addToCartDB = async ({ userId, productId }) => {
   const exists = await productAlreadyInCart(userId, productId)
-  console.log('addToCartDB: exists')
-  console.log(exists.length)
   if(exists.length) return;
   
   await new Promise ((resolve, reject) => {

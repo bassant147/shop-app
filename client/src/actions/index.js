@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SIGN_IN, SIGN_OUT,FETCH_USER, CREATE_USER, CHECK_USER, FETCH_PRODUCTS, ADD_TO_CART, GET_CART } from './types';
+import { SIGN_IN, SIGN_OUT,FETCH_USER, CREATE_USER, CHECK_USER, FETCH_PRODUCTS, ADD_TO_CART, GET_CART, GET_WISHLIST } from './types';
 
 // User Action Creators
 export const signIn = (userId) => {
@@ -27,16 +27,6 @@ export const checkUser = (user) => async dispatch => {
   dispatch({ type: CHECK_USER, payload: userId.data});    
 } 
 
-/* export const createUser = (user) => {
-  console.log('from actions')
-  console.log(user)
-  axios.post('/auth/signup', user);
-  return {
-    type: CREATE_USER,
-    payload: user
-  }
-} */
-
 export const createUser = (user) => async dispatch => {
   await axios.post('/auth/signup', user);
   dispatch({ type: CREATE_USER, payload: user});
@@ -54,10 +44,12 @@ export const addToCart = (userId, productId) => async dispatch => {
   }
 }
 
-export const getCart = () => async dispatch => {
-  
-    const cart = await axios.get('/api/users')
-    console.log('getcart action')
-    console.log(cart)
-    dispatch({ type: GET_CART, payload: cart.data});
+export const getCart = () => async dispatch => {  
+  const cart = await axios.get('/api/users/cart')
+  dispatch({ type: GET_CART, payload: cart.data});
+}
+
+export const getWishList = () => async dispatch => {
+  const wishlist = await axios.get('/api/users/wishlist')
+  dispatch({ type: GET_WISHLIST, payload: wishlist.data});
 }

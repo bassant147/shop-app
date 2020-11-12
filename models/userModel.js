@@ -32,7 +32,6 @@ exports.getUserByEmailDB = (email) => {
   return new Promise( (resolve, reject) => {
     db.query(sql, email, (err, results) => {
       if(err) {
-        console.log('Promise rejected in getUserByEmailDB')
         reject(err);
       }
       return resolve(results[0]);
@@ -44,11 +43,24 @@ exports.getCartDB = (userId) => {
   return new Promise ((resolve, reject) => {
     let sql = `SELECT product_name, price, img_url FROM shopdb.products 
     WHERE product_id IN (
-              SELECT product_id FROM shopdb.cart WHERE user_id = ${userId}
-            );`
+      SELECT product_id FROM shopdb.cart WHERE user_id = ${userId} AND saved_for_later = 0
+    );`
     db.query(sql, (err, results) => {
       if(err) reject(err);
       resolve(results);
     })
   });
+}
+
+exports.getWishListDB = (userId) => {
+  return new Promise ((resolve, reject) => {
+    let sql = `SELECT product_name, price, img_url FROM shopdb.products 
+    WHERE product_id IN (
+      SELECT product_id FROM shopdb.cart WHERE user_id = ${userId} AND saved_for_later = 1
+    );`
+    db.query(sql, (err, results) => {
+      if(err) reject(err);
+      resolve(results);
+    })
+  })   
 }
