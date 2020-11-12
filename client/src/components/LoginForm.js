@@ -29,8 +29,12 @@ class LoginForm extends React.Component {
 
   render() {
     return (
+      <div className="container">
+      
+      <div className="section">
+      
         <div className="row">
-          <form onSubmit={this.onFormSubmit} className="col s12">
+          <form onSubmit={this.onFormSubmit} className="col offset-s1 s12">
             <div className="row">
               <div className="input-field col s6">
                 <input placeholder="Email" id="email" type="email" className="validate" value={this.state.email} onChange={e => this.setState({ email: e.target.value })} />
@@ -45,12 +49,14 @@ class LoginForm extends React.Component {
             </div>
             <div className="row">
               
-                <button className="btn waves-effect waves-light right" type="submit" name="action">
+                <button className="btn waves-effect waves-light col offset-s4 center" type="submit" name="action">
                   Submit
                 </button>
              
             </div>
           </form>
+        </div>
+        </div>
         </div>
     )
   } 

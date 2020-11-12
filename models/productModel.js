@@ -45,6 +45,5 @@ exports.addToCartDB = async ({ userId, productId }) => {
     console.log('addToCartDB: results from insert');
     console.log(results)
   })
-  //return getCart(userId);
   
 }

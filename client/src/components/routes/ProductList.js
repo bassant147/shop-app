@@ -39,7 +39,7 @@ class ProductList extends React.Component {
 
   render() {
     return (
-      <div className="row">
+      <div className="container row">
         {this.renderedProducts()}
       </div>
     );

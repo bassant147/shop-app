@@ -37,10 +37,12 @@ class Header extends React.Component {
   render() {
     return (
       <nav>
-        <div className="nav-wrapper">
-          <Link to="/" className="left brand-logo">
-            shop
+        <div className="nav-wrapper teal lighten-2" >
+          
+          <Link to="/" className="brand-logo col">
+            <em>&nbsp; shop</em>
           </Link>
+          
           {this.renderContent()}
         </div>
       </nav>
