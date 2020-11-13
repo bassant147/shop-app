@@ -1,11 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getWishList } from '../../actions';
+import { getWishList, addToCart } from '../../actions';
 
 class WishList extends React.Component { 
   componentDidMount() {
     this.props.getWishList();
   }
+
+  //add to cart
+  //remove from wishlist
 
   renderWishList() {
     return this.props.wishlist.map((row) => {
@@ -16,7 +19,7 @@ class WishList extends React.Component {
           <h6 className="" style={{"fontWeight": "500"}}><br/><br/><em>{row.product_name}</em></h6>
           <a href="#!" className="secondary-content"><i className="material-icons">delete</i></a>
           <div className="secondary-content">&nbsp; &nbsp;</div>
-          <a href="#!" className="secondary-content"><i className="material-icons">shopping_cart</i></a>
+          <a href="#!" onClick={() => this.props.addToCart(this.props.userId, row.product_id)} className="secondary-content"><i className="material-icons">shopping_cart</i></a>
           <p><em>{row.price} egp</em></p>            
         </div>
         </li>
@@ -43,8 +46,9 @@ class WishList extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    wishlist: state.user.wishlist
+    userId: state.auth.userId,
+    wishlist: state.product.wishlist
   }
 }
 
-export default connect(mapStateToProps, {getWishList})(WishList);
+export default connect(mapStateToProps, {getWishList, addToCart})(WishList);

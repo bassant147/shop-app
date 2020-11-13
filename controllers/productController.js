@@ -7,8 +7,13 @@ exports.getAllProducts = async (req, res) => {
 }
 
 exports.addToCart = async (req, res) => {
-
   await Product.addToCartDB(req.body);
+  res.send();
+}
+
+exports.removeFromCart = async (req, res) => {
+  await Product.removeFromCartDB(req.params.userId, req.params.productId);
+
   res.send();
 }
 

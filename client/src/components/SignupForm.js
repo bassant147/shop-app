@@ -63,8 +63,4 @@ class SignupForm extends React.Component {
   }
 }
 
-/* export default reduxForm({
-  form: 'signupForm'
-})(SignupForm); */
-
 export default SignupForm;

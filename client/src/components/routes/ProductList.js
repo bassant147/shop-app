@@ -22,7 +22,7 @@ class ProductList extends React.Component {
               <div className="card-action">
                 <a href='#' onClick={() => {
                   if(this.props.userId)
-                    this.props.addToCart(this.props.userId.data, product.product_id)
+                    this.props.addToCart(this.props.userId, product.product_id)
                   else 
                     this.props.history.push("/login");
                 }

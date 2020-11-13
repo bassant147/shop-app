@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getCart } from '../../actions';
+import { getCart, removeFromCart } from '../../actions';
 
 class Cart extends Component {
   componentDidMount() {
     this.props.getCart();
   }
+
+  //add to wishlist
+  //remove from cart
 
   renderCart() {    
     return this.props.cart.map((row) => {
@@ -14,7 +17,7 @@ class Cart extends Component {
         <div>
           <img alt="" src={row.img_url} className="col s3"/>
           <h6 className="" style={{"fontWeight": "500"}}><br/><br/><em>{row.product_name}</em></h6>
-          <a href="#!" className="secondary-content"><i className="material-icons">delete</i></a>
+          <a onClick={() => { this.props.removeFromCart(this.props.userId, row.product_id) }} href="#!" className="secondary-content"><i className="material-icons">delete</i></a>
           <div className="secondary-content">&nbsp; &nbsp;</div>
           <a href="#!" className="secondary-content"><i className="material-icons">favorite_border</i></a>
           <p><em>{row.price} egp</em></p>            
@@ -47,8 +50,9 @@ class Cart extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    cart: state.user.cart
+    cart: state.product.cart,
+    userId: state.auth.userId
   }
 }
 
-export default connect(mapStateToProps, {getCart})(Cart);
+export default connect(mapStateToProps, {getCart, removeFromCart})(Cart);

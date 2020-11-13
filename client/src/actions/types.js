@@ -8,3 +8,4 @@ export const FETCH_PRODUCTS = 'fetch_products' ;
 export const ADD_TO_CART = 'add_to_cart';
 export const GET_CART = 'get_cart';
 export const GET_WISHLIST = 'get_wishlist';
+export const REMOVE_FROM_CART = 'remove_from_cart';

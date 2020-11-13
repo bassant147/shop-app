@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SIGN_IN, SIGN_OUT,FETCH_USER, CREATE_USER, CHECK_USER, FETCH_PRODUCTS, ADD_TO_CART, GET_CART, GET_WISHLIST } from './types';
+import { SIGN_IN, SIGN_OUT,FETCH_USER, CREATE_USER, CHECK_USER, FETCH_PRODUCTS, ADD_TO_CART, REMOVE_FROM_CART, GET_CART, GET_WISHLIST } from './types';
 
 // User Action Creators
 export const signIn = (userId) => {
@@ -17,9 +17,8 @@ export const signOut = () => {
 }
 
 export const fetchUser = () => async dispatch => {
-    const userId = await axios.get('/auth/current_user');
-
-    dispatch({ type: FETCH_USER, payload: userId});
+    const response = await axios.get('/auth/current_user');
+    dispatch({ type: FETCH_USER, payload: response.data});
 }
 
 export const checkUser = (user) => async dispatch => {
@@ -41,13 +40,22 @@ export const addToCart = (userId, productId) => async dispatch => {
   if(userId) {
     await axios.post('/api/products', {userId, productId});
     dispatch({ type: ADD_TO_CART});
-  }
+  } 
+}
+
+export const removeFromCart = (userId, productId) => async dispatch => {
+  await axios.get(`/api/products/cart/${userId}/${productId}`);
+  const cart = await axios.get('/api/users/cart');
+  console.log('cart: ')
+  dispatch({type: REMOVE_FROM_CART, payload: cart.data});
+  // handle the cart coming back from removeFromCart() in cart component
 }
 
 export const getCart = () => async dispatch => {  
-  const cart = await axios.get('/api/users/cart')
+  const cart = await axios.get('/api/users/cart');
   dispatch({ type: GET_CART, payload: cart.data});
 }
+
 
 export const getWishList = () => async dispatch => {
   const wishlist = await axios.get('/api/users/wishlist')

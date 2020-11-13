@@ -41,7 +41,7 @@ exports.getUserByEmailDB = (email) => {
 
 exports.getCartDB = (userId) => {
   return new Promise ((resolve, reject) => {
-    let sql = `SELECT product_name, price, img_url FROM shopdb.products 
+    let sql = `SELECT product_id, product_name, price, img_url FROM shopdb.products 
     WHERE product_id IN (
       SELECT product_id FROM shopdb.cart WHERE user_id = ${userId} AND saved_for_later = 0
     );`
@@ -54,7 +54,7 @@ exports.getCartDB = (userId) => {
 
 exports.getWishListDB = (userId) => {
   return new Promise ((resolve, reject) => {
-    let sql = `SELECT product_name, price, img_url FROM shopdb.products 
+    let sql = `SELECT product_id, product_name, price, img_url FROM shopdb.products 
     WHERE product_id IN (
       SELECT product_id FROM shopdb.cart WHERE user_id = ${userId} AND saved_for_later = 1
     );`

@@ -9,6 +9,10 @@ router
   .post(productController.addToCart)
 
 router
+  .route('/cart/:userId/:productId')
+  .get(productController.removeFromCart)  
+
+router
   .route('/:id')
 //  .get(productController.getProduct)
 //  .post(productController.createProduct)
