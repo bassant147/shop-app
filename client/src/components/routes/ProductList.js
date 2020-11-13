@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { fetchAllProducts, addToCart } from '../../actions';
+import { fetchAllProducts, addToCart, addToWishList } from '../../actions';
 
 class ProductList extends React.Component {
   componentDidMount() {
@@ -20,14 +20,20 @@ class ProductList extends React.Component {
                 <span className="card-title" style={{"fontFamily": "lato" , "textShadow": "2px 2px 2px #000"}}>{product.product_name}</span>
               </div>
               <div className="card-action">
-                <a href='#' onClick={() => {
-                  if(this.props.userId)
-                    this.props.addToCart(this.props.userId, product.product_id)
-                  else 
-                    this.props.history.push("/login");
-                }
-                 }><i className="material-icons">add_shopping_cart</i></a>
-                <a href='#'><i className="material-icons">favorite_border</i></a>
+                <a 
+                  href='#' 
+                  onClick={() => { if (this.props.userId) this.props.addToCart(this.props.userId, product.product_id)
+                                  else this.props.history.push("/login"); }}>
+                  <i className="material-icons">add_shopping_cart</i>
+                </a>
+
+                <a 
+                  href='#'
+                   onClick={() => { if (this.props.userId) this.props.addToWishList(this.props.userId, product.product_id) 
+                                    else this.props.history.push("/login"); }}>
+                  <i className="material-icons">favorite_border</i>
+                </a>
+
                 <span className="right grey-text text-darken-2">{product.price} egp</span>
               </div>
             </div>
@@ -54,4 +60,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, { fetchAllProducts, addToCart })(ProductList));
+export default withRouter(connect(mapStateToProps, { fetchAllProducts, addToCart, addToWishList })(ProductList));

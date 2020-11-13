@@ -1,9 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getWishList, addToCart } from '../../actions';
+import { getWishList, addToCart, removeFromWishList } from '../../actions';
 
 class WishList extends React.Component { 
   componentDidMount() {
+    this.props.getWishList();
+  }
+
+  componentDidUpdate() {
     this.props.getWishList();
   }
 
@@ -17,9 +21,23 @@ class WishList extends React.Component {
         <div>
           <img alt="" src={row.img_url} className="col s3"/>
           <h6 className="" style={{"fontWeight": "500"}}><br/><br/><em>{row.product_name}</em></h6>
-          <a href="#!" className="secondary-content"><i className="material-icons">delete</i></a>
+
+          <a 
+            href="#!" 
+            onClick={() => this.props.removeFromWishList(this.props.userId, row.product_id)} 
+            className="secondary-content">
+            <i className="material-icons">delete</i>
+          </a>
+
           <div className="secondary-content">&nbsp; &nbsp;</div>
-          <a href="#!" onClick={() => this.props.addToCart(this.props.userId, row.product_id)} className="secondary-content"><i className="material-icons">shopping_cart</i></a>
+
+          <a 
+            href="#!"
+            onClick={() => this.props.addToCart(this.props.userId, row.product_id)} 
+            className="secondary-content">
+            <i className="material-icons">shopping_cart</i>
+          </a>
+
           <p><em>{row.price} egp</em></p>            
         </div>
         </li>
@@ -40,7 +58,7 @@ class WishList extends React.Component {
         </div>
       );
     } 
-    else return <div>WishList Is Empty</div>
+    else return <div></div>
   }
 }
 
@@ -51,4 +69,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, {getWishList, addToCart})(WishList);
+export default connect(mapStateToProps, {getWishList, addToCart, removeFromWishList})(WishList);

@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getCart, removeFromCart } from '../../actions';
+import { getCart, addToWishList, removeFromCart } from '../../actions';
 
 class Cart extends Component {
   componentDidMount() {
     this.props.getCart();
   }
 
-  //add to wishlist
-  //remove from cart
+  componentDidUpdate() {
+    this.props.getCart();
+  }
 
   renderCart() {    
     return this.props.cart.map((row) => {
@@ -17,9 +18,22 @@ class Cart extends Component {
         <div>
           <img alt="" src={row.img_url} className="col s3"/>
           <h6 className="" style={{"fontWeight": "500"}}><br/><br/><em>{row.product_name}</em></h6>
-          <a onClick={() => { this.props.removeFromCart(this.props.userId, row.product_id) }} href="#!" className="secondary-content"><i className="material-icons">delete</i></a>
+
+          <a 
+            href="#!" 
+            onClick={() => { this.props.removeFromCart(this.props.userId, row.product_id) }} className="secondary-content">
+            <i className="material-icons">delete</i>
+          </a>
+
           <div className="secondary-content">&nbsp; &nbsp;</div>
-          <a href="#!" className="secondary-content"><i className="material-icons">favorite_border</i></a>
+
+          <a 
+            href="#!" 
+            onClick={() => { this.props.addToWishList(this.props.userId, row.product_id)}}
+            className="secondary-content">
+            <i className="material-icons">favorite_border</i>
+          </a>
+
           <p><em>{row.price} egp</em></p>            
         </div>
         </li>
@@ -44,7 +58,7 @@ class Cart extends Component {
             </div>            
           </div>    
         )
-      } else return <div> Cart Is Empty </div>
+      } else return <div></div>;
   }
 }
 
@@ -55,4 +69,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, {getCart, removeFromCart})(Cart);
+export default connect(mapStateToProps, {getCart, addToWishList, removeFromCart})(Cart);

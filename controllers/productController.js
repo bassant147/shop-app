@@ -17,6 +17,15 @@ exports.removeFromCart = async (req, res) => {
   res.send();
 }
 
+exports.addToWishList = async (req, res) => {
+  await Product.addToWishListDB(req.body);
+  res.send();
+}
+
+exports.removeFromWishList = async (req, res) => {
+  await Product.removeFromWishListDB(req.params.userId, req.params.productId);
+  res.send();
+}
 
 
 exports.getProduct = (req, res) => {
