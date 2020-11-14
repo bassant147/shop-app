@@ -7,7 +7,7 @@ import Header from './Header';
 import ProductList from './routes/ProductList';
 import Signup from './routes/Signup';
 import Login from './routes/Login';
-import PurchaseHistory from './routes/PurchaseHistory';
+import Checkout from './routes/Checkout';
 import Cart from './routes/Cart';
 import WishList from './routes/WishList';
 
@@ -26,7 +26,7 @@ class App extends React.Component {
             <Route path="/" exact component={ProductList}/>
             <Route path="/signup" component={Signup}/>
             <Route path="/login" component={Login}/>
-            <Route path="/purchase-history" component={PurchaseHistory}/>
+            <Route path="/checkout" component={Checkout}/>
             <Route path="/cart" component={Cart}/>
             <Route path="/wishlist" component={WishList}/>
           </div>

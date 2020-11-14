@@ -1,4 +1,4 @@
-import { FETCH_PRODUCTS, GET_CART, GET_WISHLIST, ADD_TO_CART, REMOVE_FROM_CART, ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST} from '../actions/types';
+import { FETCH_PRODUCTS, GET_CART, GET_WISHLIST, ADD_TO_CART, REMOVE_FROM_CART, ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST, CHECKOUT, SHOW_RECEIPT} from '../actions/types';
 
 const productReducer = (state = {}, action) => {
   switch(action.type) {
@@ -9,14 +9,17 @@ const productReducer = (state = {}, action) => {
     case GET_WISHLIST:
       return { ...state, wishlist: action.payload}
     case ADD_TO_CART:
-      // in case payload is undefined return state
       return state;
     case REMOVE_FROM_CART:
       return { ...state, cart: action.payload};
     case ADD_TO_WISHLIST:
       return state;
-      case REMOVE_FROM_WISHLIST:
+    case REMOVE_FROM_WISHLIST:
         return { ...state, wishlist: action.payload};
+    case CHECKOUT:
+        return { ...state, orderId: action.payload};
+    case SHOW_RECEIPT:
+        return { ...state, order: action.payload};
     default:
       return state;
   }

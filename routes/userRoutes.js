@@ -13,6 +13,14 @@ router
   .get(userController.getWishList);
 
 router
+  .route('/order')
+  .post(userController.placeOrder);
+
+router
+  .route('/order/:orderId')
+  .get(userController.getOrderItemsAndPurchaseDate)
+  
+router
   .route('/:id')
   .get(userController.getUser);
   

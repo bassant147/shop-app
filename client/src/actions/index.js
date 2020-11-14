@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SIGN_IN, SIGN_OUT,FETCH_USER, CREATE_USER, CHECK_USER, FETCH_PRODUCTS, ADD_TO_CART, REMOVE_FROM_CART, GET_CART, GET_WISHLIST, ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST } from './types';
+import { SIGN_IN, SIGN_OUT,FETCH_USER, CREATE_USER, CHECK_USER, FETCH_PRODUCTS, ADD_TO_CART, REMOVE_FROM_CART, GET_CART, GET_WISHLIST, ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST, CHECKOUT, SHOW_RECEIPT } from './types';
 
 // User Action Creators
 export const signIn = (userId) => {
@@ -71,4 +71,14 @@ export const removeFromWishList = (userId, productId) => async dispatch => {
   await axios.get(`/api/products/wishlist/remove/${userId}/${productId}`);
   const wishlist = await axios.get('/api/users/wishlist');
   dispatch({type: REMOVE_FROM_WISHLIST, payload: wishlist.data});
+}
+
+export const checkout = (userId) => async dispatch => {
+  const orderId = await axios.post(`/api/users/order`, userId)
+  dispatch({type: CHECKOUT, payload: orderId.data});
+}
+
+export const showReceipt = (orderId) => async dispatch => {
+  const order = await axios.get(`/api/users/order/${orderId}`)
+  dispatch({ type: SHOW_RECEIPT, payload: order.data})
 }

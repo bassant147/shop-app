@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getCart, addToWishList, removeFromCart } from '../../actions';
+import { withRouter } from 'react-router-dom';
+import { getCart, addToWishList, removeFromCart, checkout } from '../../actions';
 
 class Cart extends Component {
   componentDidMount() {
@@ -46,7 +47,12 @@ class Cart extends Component {
         return (
           <div className="container">
             <div className="section center">
-              <button className="btn waves-effect waves-light" type="submit" name="action">Checkout
+              <button 
+                onClick={() => {
+                  this.props.checkout(this.props.userId)
+                  this.props.history.push("/checkout");} }
+                className="btn waves-effect waves-light" 
+                type="submit" name="action">Checkout
                 <i className="material-icons right">send</i>
               </button>
             </div>
@@ -69,4 +75,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, {getCart, addToWishList, removeFromCart})(Cart);
+export default withRouter(connect(mapStateToProps, {getCart, addToWishList, removeFromCart, checkout})(Cart));

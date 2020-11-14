@@ -64,3 +64,83 @@ exports.getWishListDB = (userId) => {
     })
   })   
 }
+
+const calcAmountToBePaid = (userId) => {
+  return new Promise ((resolve, reject) => {
+    let sql = `SELECT SUM(price) AS sum FROM shopdb.products WHERE product_id IN (
+      SELECT product_id FROM shopdb.cart WHERE user_id = ${userId} AND saved_for_later = 0
+    );`
+    db.query(sql, (err, result) => {
+      if (err) reject(err);
+      resolve(result);
+    })
+  }).then(result => {
+    results = Object.assign({}, result)
+    return results[0].sum
+  })
+
+}
+
+const clearCart = async (userId) => {
+  await new Promise ((resolve, reject) => {
+    let sql = `DELETE FROM shopdb.cart WHERE user_id = ${userId}`
+    db.query(sql, (err, result) => {
+      if(err) reject(err);
+      resolve(result);
+    })
+  })
+  return;
+}
+
+exports.placeOrderDB = async (userId) => {
+  const sum = await calcAmountToBePaid(userId);
+  const orderId = await new Promise ((resolve, reject) => {
+    let sql = `INSERT INTO shopdb.orders SET ?`;
+    let values = { 
+      user_id: userId,
+      amount: sum
+    }
+    db.query(sql, values, (err, result) => {
+      if(err) reject(err);
+      resolve(result.insertId);
+    })
+  })
+  // add each order item in the order table to the order_items table
+  await new Promise((resolve, reject) => {
+    let sql = `INSERT INTO shopdb.order_items (order_id, product_id, price)
+    SELECT ${orderId}, shopdb.cart.product_id, shopdb.products.price FROM shopdb.cart
+    INNER JOIN shopdb.products
+    ON cart.product_id = products.product_id
+    WHERE cart.saved_for_later = 0;`
+    
+    db.query(sql, (err, results) => {
+      if (err) reject(err);
+      resolve(results);
+    })
+  })
+  clearCart(userId);
+  return orderId;
+}
+
+exports.getOrderItemsAndPurchaseDateDB = async (orderId) => {
+  console.log('orderId getorder' + orderId)
+  const amount = await new Promise ((resolve, reject) => {
+    let sql = `SELECT amount FROM shopdb.orders WHERE order_id = ${orderId}`;
+    db.query(sql, (err, result) =>{
+      if(err) reject(err);
+      resolve(result); 
+    })
+  }).then(result => {
+    results = Object.assign({}, result)
+    return results[0].amount
+  })
+
+  return new Promise((resolve, reject) => {
+    let sql = `SELECT ${orderId}, ${amount}, product_name, price
+    FROM shopdb.products WHERE product_id IN (SELECT product_id FROM shopdb.order_items WHERE order_id = ${orderId});`
+    db.query(sql, (err, results) =>{
+      if(err) reject(err);
+      resolve(results); 
+    });
+  })
+}

@@ -11,3 +11,5 @@ export const GET_CART = 'get_cart';
 export const GET_WISHLIST = 'get_wishlist';
 export const REMOVE_FROM_CART = 'remove_from_cart';
 export const REMOVE_FROM_WISHLIST = 'remove_from_wishlist';
+export const CHECKOUT = 'checkout';
+export const SHOW_RECEIPT = 'show_receipt';
