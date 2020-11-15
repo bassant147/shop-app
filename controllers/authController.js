@@ -25,8 +25,6 @@ const comparePasswords = async (saved, supplied) => {
 exports.signup = async (req, res) => {
   const user = req.body;
   const existingUser = await User.getUserByEmailDB(user.email);
-  console.log('existing user')
-  console.log(existingUser);
   if(existingUser) {
     console.log('email already exists');
   } else {
@@ -36,7 +34,6 @@ exports.signup = async (req, res) => {
       passwordHashing(user.password).then(password => {
         User.createUserDB(user, password).then(result => {
           req.session.userId = result.insertId;
-          console.log('from signup in authcontroller')
           res.send((req.session.userId).toString());
         });
       })
@@ -61,8 +58,6 @@ exports.login = async (req, res) => {
     return res.send('Invalid Password');
   } 
   req.session.userId = existingUser.user_id;
-  console.log('user logged in and the id is....')
-  console.log(req.session.userId);
 
   return res.send((req.session.userId).toString());
 }

@@ -123,7 +123,6 @@ exports.placeOrderDB = async (userId) => {
 }
 
 exports.getOrderItemsAndPurchaseDateDB = async (orderId) => {
-  console.log('orderId getorder' + orderId)
   const amount = await new Promise ((resolve, reject) => {
     let sql = `SELECT amount FROM shopdb.orders WHERE order_id = ${orderId}`;
     db.query(sql, (err, result) =>{
@@ -136,7 +135,7 @@ exports.getOrderItemsAndPurchaseDateDB = async (orderId) => {
   })
 
   return new Promise((resolve, reject) => {
-    let sql = `SELECT ${orderId}, ${amount}, product_name, price
+    let sql = `SELECT ${orderId} AS orderId, ${amount} AS amount, product_name, price
     FROM shopdb.products WHERE product_id IN (SELECT product_id FROM shopdb.order_items WHERE order_id = ${orderId});`
     db.query(sql, (err, results) =>{
       if(err) reject(err);

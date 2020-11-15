@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { getCart, addToWishList, removeFromCart, checkout } from '../../actions';
+import { getCart, addToWishList, removeFromCart, checkout} from '../../actions';
 
 class Cart extends Component {
   componentDidMount() {
-    this.props.getCart();
-  }
-
-  componentDidUpdate() {
     this.props.getCart();
   }
 
@@ -48,9 +44,12 @@ class Cart extends Component {
           <div className="container">
             <div className="section center">
               <button 
-                onClick={() => {
-                  this.props.checkout(this.props.userId)
-                  this.props.history.push("/checkout");} }
+                onClick={(e) => {
+                  if(this.props.cart.length) {
+                    this.props.checkout(this.props.userId)
+                    this.props.history.push("/checkout");
+                  } else e.preventDefault()
+                  } }
                 className="btn waves-effect waves-light" 
                 type="submit" name="action">Checkout
                 <i className="material-icons right">send</i>
@@ -64,14 +63,14 @@ class Cart extends Component {
             </div>            
           </div>    
         )
-      } else return <div></div>;
+      } else return <div></div>
   }
 }
 
 const mapStateToProps = (state) => {
   return {
     cart: state.product.cart,
-    userId: state.auth.userId
+    userId: state.user.userId
   }
 }
 
