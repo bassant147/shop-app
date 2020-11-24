@@ -1,14 +1,7 @@
 import axios from 'axios';
-import { SIGN_IN, SIGN_OUT,FETCH_USER, CREATE_USER, FAILED_USER_CREATION, CHECK_USER, FETCH_PRODUCTS, ADD_TO_CART, REMOVE_FROM_CART, GET_CART, GET_WISHLIST, ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST, CHECKOUT, SHOW_RECEIPT, PURCHASE_HISTORY } from './types';
+import { SIGN_OUT,FETCH_USER, CREATE_USER, FAILED_USER_CREATION, CHECK_USER, FETCH_PRODUCTS, ADD_TO_CART, REMOVE_FROM_CART, GET_CART, GET_WISHLIST, ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST, CHECKOUT, SHOW_RECEIPT, PURCHASE_HISTORY } from './types';
 
 // User Action Creators
-export const signIn = (userId) => {
-  return {
-    type: SIGN_IN,
-    payload: userId
-  }
-}
-
 export const signOut = () => {
   axios.get('/auth/logout');
   return {

@@ -29,7 +29,7 @@ exports.signup = async (req, res) => {
     res.status(409).send({ email: 'Email Already Exists!'})
   } else {
     if(user.password !== user.passwordConfirm) {
-      console.log('Passwords must match!');
+      res.status(403).send({ password: 'Passwords Must Match!'});
     } else {
       passwordHashing(user.password).then(password => {
         User.createUserDB(user, password).then(result => {

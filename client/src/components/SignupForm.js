@@ -9,11 +9,20 @@ class SignupForm extends React.Component {
     this.props.onSubmit(this.state);
   }
   
-  renderError() {
-    if(this.props.error) {
-      return <span style={{'color': 'red', 'fontSize':'12px'}}>{this.props.error}</span>
-    }
-    return <span></span>
+  renderEmailError() {
+    let error = this.props.error;
+    if(error.email) 
+      return <span style={{'color': 'red', 'fontSize':'12px'}}>{error.email}</span>
+    
+    else return <span></span>
+  }
+
+  renderPasswordError() {
+    let error = this.props.error;
+    if(error.password)
+      return <span style={{'color': 'red', 'fontSize':'12px'}}>{error.password}</span>
+    
+    else return <span></span>
   }
 
   render(){
@@ -50,7 +59,7 @@ class SignupForm extends React.Component {
                       className="validate"
                       value={this.state.email}
                       onChange={e => this.setState({ email: e.target.value })} />
-                {this.renderError()}
+                {this.renderEmailError()}
               </div>
               <div className="input-field col s5">
                 <input placeholder="Phone Number" 
@@ -91,6 +100,7 @@ class SignupForm extends React.Component {
                       className="validate" 
                       value={this.state.passwordConfirm} 
                       onChange={e => this.setState({ passwordConfirm: e.target.value })} />
+                {this.renderPasswordError()}
               </div>
               <div className="section">
               <button className="btn waves-effect col offset-s3 waves-light" type="submit" name="action">Submit

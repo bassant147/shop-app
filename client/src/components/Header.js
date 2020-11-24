@@ -52,7 +52,7 @@ class Header extends React.Component {
   }
 
 const mapStateToProps = (state) => {
-  return { isSignedIn: state.auth.isSignedIn }
+  return { isSignedIn: state.user.isSignedIn }
 }
 
 export default connect(mapStateToProps, {signOut})(Header);

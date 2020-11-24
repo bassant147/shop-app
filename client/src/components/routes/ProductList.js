@@ -56,7 +56,7 @@ class ProductList extends React.Component {
 const mapStateToProps = (state) => {
   return {
     products: state.product,
-    userId: state.auth.userId
+    userId: state.user.userId
   }
 }
 

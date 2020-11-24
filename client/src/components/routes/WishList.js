@@ -64,7 +64,7 @@ class WishList extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    userId: state.auth.userId,
+    userId: state.user.userId,
     wishlist: state.product.wishlist
   }
 }

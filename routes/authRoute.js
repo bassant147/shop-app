@@ -15,7 +15,7 @@ router
   .route('/logout')
   .get((req, res) => {
     req.session.userId = null;
-    res.redirect('/');
+    res.send();
   })
 
 router

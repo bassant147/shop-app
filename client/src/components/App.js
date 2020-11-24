@@ -13,10 +13,6 @@ import WishList from './routes/WishList';
 import PurchaseHistory from './routes/PurchaseHistory';
 
 class App extends React.Component {
-  componentDidMount() {
-    this.props.fetchUser();
-  }
-
   render() {
     return (
       <div>    
@@ -36,6 +32,5 @@ class App extends React.Component {
     );
   }
 }
-
 
 export default connect(null, actions)(App);

@@ -2,25 +2,25 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
 import Form from '../SignupForm';
-import { createUser, signIn } from '../../actions';
+import { createUser} from '../../actions';
 
 class Signup extends React.Component {
-  // function that handles data coming from the form component
   state = {error: {}}
 
+  // function that handles data coming from the form component
   onFormSubmit = async (formData) => {
     
     await this.props.createUser(formData);
 
-    if(this.props.error) this.setState({emailError: this.props.error.email})
-    //this.props.signIn(this.props.userId);
+    //if(this.props.error) this.setState({emailError: this.props.error.email})
+    if(this.props.error) this.setState({error: {...this.props.error}})
     else this.props.history.push("/");
   }
 
   render() {
     return (
       <div>
-        <Form error={this.state.emailError} onSubmit={this.onFormSubmit}/>
+        <Form error={this.state.error} onSubmit={this.onFormSubmit}/>
       </div>
     );
   }
@@ -38,4 +38,4 @@ const mapStateToProps = state => {
   }  
 }
 
-export default withRouter(connect(mapStateToProps , { createUser, signIn })(Signup));
+export default withRouter(connect(mapStateToProps , { createUser})(Signup));
