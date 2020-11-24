@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SIGN_IN, SIGN_OUT,FETCH_USER, CREATE_USER, CHECK_USER, FETCH_PRODUCTS, ADD_TO_CART, REMOVE_FROM_CART, GET_CART, GET_WISHLIST, ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST, CHECKOUT, SHOW_RECEIPT } from './types';
+import { SIGN_IN, SIGN_OUT,FETCH_USER, CREATE_USER, FAILED_USER_CREATION, CHECK_USER, FETCH_PRODUCTS, ADD_TO_CART, REMOVE_FROM_CART, GET_CART, GET_WISHLIST, ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST, CHECKOUT, SHOW_RECEIPT, PURCHASE_HISTORY } from './types';
 
 // User Action Creators
 export const signIn = (userId) => {
@@ -27,8 +27,17 @@ export const checkUser = (user) => async dispatch => {
 } 
 
 export const createUser = (user) => async dispatch => {
-  await axios.post('/auth/signup', user);
-  dispatch({ type: CREATE_USER, payload: user});
+  //await axios.post('/auth/signup', user);
+  //dispatch({ type: CREATE_USER, payload: user});
+  console.log('action creators file')
+  let res = '';
+  try {
+    res = await axios.post('/auth/signup', user);
+  } catch(err) {
+    console.log(err.response.data)
+    return dispatch({ type: FAILED_USER_CREATION, payload: err.response.data});
+  }
+  dispatch({ type: CREATE_USER, payload: res.data});  
 } 
 
 export const fetchAllProducts = () => async dispatch => {
@@ -81,4 +90,11 @@ export const checkout = (userId) => async dispatch => {
 export const showReceipt = (orderId) => async dispatch => {
   const order = await axios.get(`/api/users/order/${orderId}`)
   dispatch({ type: SHOW_RECEIPT, payload: order.data})
+}
+
+export const getHistory = () => async dispatch => {
+  const purchasedItems = await axios.get('/api/users/purchase-history')
+  console.log('in getHistory action')
+  console.log(purchasedItems.data)
+  dispatch({ type: PURCHASE_HISTORY, payload: purchasedItems.data })
 }

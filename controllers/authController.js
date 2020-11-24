@@ -26,7 +26,7 @@ exports.signup = async (req, res) => {
   const user = req.body;
   const existingUser = await User.getUserByEmailDB(user.email);
   if(existingUser) {
-    console.log('email already exists');
+    res.status(409).send({ email: 'Email Already Exists!'})
   } else {
     if(user.password !== user.passwordConfirm) {
       console.log('Passwords must match!');

@@ -16,6 +16,14 @@ app.use('/api/products/', productRouter);
 app.use('/api/users/', userRouter);
 app.use('/auth/', authRouter);
 
+// Route Handler for undefined routes
+app.all('*', (req, res, next) => {
+  res.status(404).json({
+    status: 'fail',
+    message: `Can not find ${req.originalUrl} on this server`
+  })  
+});
+
 app.listen(5000, () => {
   console.log('Listening on Port 5000...');
 });

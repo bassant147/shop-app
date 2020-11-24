@@ -10,6 +10,7 @@ import Login from './routes/Login';
 import Checkout from './routes/Checkout';
 import Cart from './routes/Cart';
 import WishList from './routes/WishList';
+import PurchaseHistory from './routes/PurchaseHistory';
 
 class App extends React.Component {
   componentDidMount() {
@@ -22,13 +23,13 @@ class App extends React.Component {
         <BrowserRouter>          
           <div>            
             <Header/>
-            {this.props.isSignedIn}
             <Route path="/" exact component={ProductList}/>
             <Route path="/signup" component={Signup}/>
             <Route path="/login" component={Login}/>
             <Route path="/checkout" component={Checkout}/>
             <Route path="/cart" component={Cart}/>
             <Route path="/wishlist" component={WishList}/>
+            <Route path="/purchase-history" component={PurchaseHistory}/>
           </div>
         </BrowserRouter>
       </div>
@@ -36,10 +37,5 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    isSignedIn: state.isSignedIn
-  };
-}
 
-export default connect(mapStateToProps, actions)(App);
+export default connect(null, actions)(App);

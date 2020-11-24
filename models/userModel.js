@@ -143,3 +143,29 @@ exports.getOrderItemsAndPurchaseDateDB = async (orderId) => {
     });
   })
 }
+
+exports.getPurchaseHistoryDB = async (userId) => {
+  console.log('getPurchaseHistoryDB')
+  const results = new Promise ((resolve, reject) => {
+    let sql = `SELECT order_items.order_id, order_items.price, products.product_name 
+    FROM shopdb.order_items
+    INNER JOIN shopdb.products
+    ON order_items.product_id = products.product_id
+    WHERE order_id IN (SELECT order_id FROM shopdb.orders WHERE user_id = ${userId})`;
+
+    db.query(sql, (err, results) => {
+      if(err) reject(err);
+      resolve(results)
+    })
+  })
+
+  return results.then(results => {
+    results = results.map(row => Object.assign({}, row));
+    results = results.filter( (result, index, self) => 
+                              index === self.findIndex(el => el.product_name === result.product_name ))
+    console.log(results)
+    return results;
+  })
+
+  
+}

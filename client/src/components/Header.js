@@ -5,6 +5,7 @@ import { signOut } from '../actions';
 
 class Header extends React.Component {
   renderContent() {
+    
     switch(this.props.isSignedIn) {
       case true:
         return (

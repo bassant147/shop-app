@@ -19,14 +19,18 @@ router
 router
   .route('/order/:orderId')
   .get(userController.getOrderItemsAndPurchaseDate)
-  
-router
-  .route('/:id')
-  .get(userController.getUser);
-  
 
 router
+  .route('/purchase-history')
+  .get(userController.getPurchaseHistory)
+  
+/* router
+  .route('/:id')
+  .get(userController.getUser); */
+  
+
+/* router
   .route('/current_user')
-  .get(userController.getCurrentUser);  
+  .get(userController.getCurrentUser);   */
 
 module.exports = router;

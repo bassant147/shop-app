@@ -5,9 +5,8 @@ import { showReceipt } from '../../actions';
 
 class Checkout extends React.Component {
   componentDidMount() {
-    if(this.props.orderId) {
+      console.log('showReceipt called')
       this.props.showReceipt(this.props.orderId);
-    }    
   }
 
   renderReceiptItems = () => {
@@ -15,7 +14,7 @@ class Checkout extends React.Component {
       console.log(this.props.order)
       return this.props.order.map(item => {
         return (
-          <div class="white-text" style={{"fontFamily": "lato"}}>
+          <div className="white-text" style={{"fontFamily": "lato"}}>
             <span>&bull; &nbsp; {item.product_name} &mdash; {item.price}</span> egp<br/>
           </div>
       )
@@ -40,7 +39,7 @@ class Checkout extends React.Component {
         </div>
       )
     }
-    else return <div></div>
+    else return <div>Checkout</div>
   }
 }
 

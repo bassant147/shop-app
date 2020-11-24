@@ -28,11 +28,11 @@ exports.removeFromWishList = async (req, res) => {
 }
 
 
-exports.getProduct = (req, res) => {
+exports.getProduct = async (req, res) => {
   
 }
 
-exports.createProduct = (req, res) => {
+exports.createProduct = async (req, res) => {
 
 }
 

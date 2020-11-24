@@ -1,13 +1,15 @@
 const User = require('./../models/userModel');
 
-exports.getUser = async (req, res) => {
+/* exports.getUser = async (req, res) => {
   const user = await User.getUserByIdDB(req.params.id);
+  console.log('get User conttroller')
+  console.log(user);
   return res.send(user);
-}
+}; */
 
-exports.getCurrentUser = (req, res) => {
+/* exports.getCurrentUser = (req, res) => {
   res.send(req);
-}
+} */
 
 exports.getCart = async (req, res) => {
   let cart = await User.getCartDB(req.session.userId)
@@ -29,5 +31,10 @@ exports.placeOrder = async (req, res) => {
 exports.getOrderItemsAndPurchaseDate = async (req, res) => {
   let purchasedItems = await User.getOrderItemsAndPurchaseDateDB(req.params.orderId);
   purchasedItems = purchasedItems.map(row => Object.assign({}, row));
+  res.send(purchasedItems);
+}
+
+exports.getPurchaseHistory = async (req, res) => {
+  let purchasedItems = await User.getPurchaseHistoryDB(req.session.userId);
   res.send(purchasedItems);
 }

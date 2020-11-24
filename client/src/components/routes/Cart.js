@@ -41,6 +41,7 @@ class Cart extends Component {
   render() {      
       if(this.props.cart) {
         return (
+          <div>
           <div className="container">
             <div className="section center">
               <button 
@@ -60,8 +61,17 @@ class Cart extends Component {
                 <li className="collection-header center"><h6 style={{"fontWeight":"500"}}><em>Cart Items</em></h6></li>
                 {this.renderCart()}
               </ul>
-            </div>            
-          </div>    
+            </div>
+                       
+          </div>  
+          <div className="center">
+              <button 
+                onClick={() => this.props.history.push("/purchase-history")}                  
+                className="waves-effect waves-teal btn-flat teal-text" style={{"fontWeight": "500"}}>
+                Check Previously Bought Items                
+              </button>
+          </div>   
+        </div>
         )
       } else return <div></div>
   }
