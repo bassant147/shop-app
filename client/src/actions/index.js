@@ -9,11 +9,6 @@ export const signOut = () => {
   }
 }
 
-/* export const fetchUser = () => async dispatch => {
-    const response = await axios.get('/auth/current_user');
-    dispatch({ type: FETCH_USER, payload: response.data});
-} */
-
 export const checkUser = (user) => async dispatch => {
   let userId = '';
   try {
@@ -88,7 +83,5 @@ export const showReceipt = (orderId) => async dispatch => {
 
 export const getHistory = () => async dispatch => {
   const purchasedItems = await axios.get('/api/users/purchase-history')
-  console.log('in getHistory action')
-  console.log(purchasedItems.data)
   dispatch({ type: PURCHASE_HISTORY, payload: purchasedItems.data })
 }

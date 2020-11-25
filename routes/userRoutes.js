@@ -27,10 +27,5 @@ router
 /* router
   .route('/:id')
   .get(userController.getUser); */
-  
-
-/* router
-  .route('/current_user')
-  .get(userController.getCurrentUser);   */
 
 module.exports = router;

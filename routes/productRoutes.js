@@ -27,7 +27,5 @@ router
   .route('/:id')
 //  .get(productController.getProduct)
 //  .post(productController.createProduct)
-//  .post(productController.addToCart)
- // .post(productController.addToWishlist)
 
 module.exports = router;

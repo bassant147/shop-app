@@ -9,7 +9,6 @@ class Login extends React.Component {
 
   onFormSubmit = async (formData) => {
     await this.props.checkUser(formData)
-    //await this.props.fetchUser();
     if(this.props.error) this.setState({error: {...this.props.error}})
     else this.props.history.push("/");
   }

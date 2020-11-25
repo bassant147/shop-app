@@ -5,13 +5,11 @@ import { showReceipt } from '../../actions';
 
 class Checkout extends React.Component {
   componentDidMount() {
-      console.log('showReceipt called')
-      this.props.showReceipt(this.props.orderId);
+    this.props.showReceipt(this.props.orderId);
   }
 
   renderReceiptItems = () => {
     if(this.props.order) {
-      console.log(this.props.order)
       return this.props.order.map(item => {
         return (
           <div className="white-text" style={{"fontFamily": "lato"}}>

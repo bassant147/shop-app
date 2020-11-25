@@ -5,13 +5,10 @@ import { withRouter } from 'react-router-dom';
 
 class PurchaseHistory extends React.Component {
   componentDidMount(){
-    console.log('purchase history component mounted')
     this.props.getHistory();
   }
 
   renderItems = () => {
-    console.log('purchased items from purchase history component')
-    console.log(this.props.purchasedItems)
       return this.props.purchasedItems.map(item => {
         return (
           <div key={item.product_name} className="white-text" style={{"fontFamily": "lato"}}>

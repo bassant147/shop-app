@@ -12,24 +12,24 @@ class Cart extends Component {
     return this.props.cart.map((row) => {
       return (
         <li className="collection-item row">
-        <div>
-          <img alt="" src={row.img_url} className="col s3"/>
-          <h6 className="" style={{"fontWeight": "500"}}><br/><br/><em>{row.product_name}</em></h6>
+          <div>
+            <img alt="" src={row.img_url} className="col s3"/>
+            <h6 className="" style={{"fontWeight": "500"}}><br/><br/><em>{row.product_name}</em></h6>
 
-          <a 
-            href="#!" 
-            onClick={() => { this.props.removeFromCart(this.props.userId, row.product_id) }} className="secondary-content">
-            <i className="material-icons">delete</i>
-          </a>
+            <a 
+              href="#!" 
+              onClick={() => { this.props.removeFromCart(this.props.userId, row.product_id) }} className="secondary-content">
+              <i className="material-icons">delete</i>
+            </a>
 
           <div className="secondary-content">&nbsp; &nbsp;</div>
 
-          <a 
-            href="#!" 
-            onClick={() => { this.props.addToWishList(this.props.userId, row.product_id)}}
-            className="secondary-content">
-            <i className="material-icons">favorite_border</i>
-          </a>
+            <a 
+              href="#!" 
+              onClick={() => { this.props.addToWishList(this.props.userId, row.product_id)}}
+              className="secondary-content">
+              <i className="material-icons">favorite_border</i>
+            </a>
 
           <p><em>{row.price} egp</em></p>            
         </div>

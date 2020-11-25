@@ -5,9 +5,7 @@ const userReducer = (state = {}, action) => {
     case CREATE_USER: 
       return { ...state, isSignedIn: true, userId: action.payload};          
     case FAILED_USER_CREATION:
-      return { ...state, isSignedIn: false, error: action.payload};        
-    /* case FETCH_USER:
-      return { ...state, isSignedIn: true, userId: action.payload}; */
+      return { ...state, isSignedIn: false, error: action.payload};
     case CHECK_USER:
       return { ...state, isSignedIn: true, userId: action.payload};
     case FAILED_USER_LOGIN:

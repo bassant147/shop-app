@@ -1,4 +1,3 @@
-//export const FETCH_USER = 'fetch_user';
 export const CREATE_USER = 'create_user';
 export const FAILED_USER_CREATION = 'failed_user_creation';
 export const CHECK_USER = 'check_user';

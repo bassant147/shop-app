@@ -145,7 +145,6 @@ exports.getOrderItemsAndPurchaseDateDB = async (orderId) => {
 }
 
 exports.getPurchaseHistoryDB = async (userId) => {
-  console.log('getPurchaseHistoryDB')
   const results = new Promise ((resolve, reject) => {
     let sql = `SELECT order_items.order_id, order_items.price, products.product_name 
     FROM shopdb.order_items
@@ -163,7 +162,6 @@ exports.getPurchaseHistoryDB = async (userId) => {
     results = results.map(row => Object.assign({}, row));
     results = results.filter( (result, index, self) => 
                               index === self.findIndex(el => el.product_name === result.product_name ))
-    console.log(results)
     return results;
   })
 

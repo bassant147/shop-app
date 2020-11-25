@@ -11,9 +11,6 @@ class WishList extends React.Component {
     this.props.getWishList();
   }
 
-  //add to cart
-  //remove from wishlist
-
   renderWishList() {
     return this.props.wishlist.map((row) => {
       return (
