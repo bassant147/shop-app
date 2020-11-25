@@ -1,7 +1,8 @@
-export const FETCH_USER = 'fetch_user';
+//export const FETCH_USER = 'fetch_user';
 export const CREATE_USER = 'create_user';
 export const FAILED_USER_CREATION = 'failed_user_creation';
 export const CHECK_USER = 'check_user';
+export const FAILED_USER_LOGIN = 'failed_user_login';
 export const LOGOUT = 'logout';
 export const SIGN_OUT = 'sign_out';
 export const FETCH_PRODUCTS = 'fetch_products' ;

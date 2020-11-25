@@ -64,8 +64,9 @@ class SignupForm extends React.Component {
               <div className="input-field col s5">
                 <input placeholder="Phone Number" 
                       id="phone-number" 
-                      type="number"
+                      type="text"
                       required 
+                      minLength="11"
                       className="validate" 
                       value={this.state.phone}
                       onChange={e => this.setState({ phone: e.target.value })} />

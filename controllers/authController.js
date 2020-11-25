@@ -45,17 +45,15 @@ exports.signup = async (req, res) => {
 exports.login = async (req, res) => {
   const user = req.body;
   const result = await User.getUserByEmailDB(user.email);
-  const existingUser = JSON.parse(JSON.stringify(result));
-  if(existingUser === null) {
-    console.log('email not found');
-    return res.send('email not found');
+  if(!result) {
+    return res.status(404).send({ email: 'Email doesn not exist'});
   } 
+  const existingUser = JSON.parse(JSON.stringify(result));
   const savedPassword = existingUser.user_password;
   const suppliedPassword = user.password;
-  const validPassword = comparePasswords(savedPassword, suppliedPassword);
+  const validPassword = await comparePasswords(savedPassword, suppliedPassword);
   if(!validPassword) {
-    console.log('Invalid Password');
-    return res.send('Invalid Password');
+    res.status(401).send({ password: 'Invalid Password'});
   } 
   req.session.userId = existingUser.user_id;
 

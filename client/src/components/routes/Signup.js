@@ -12,7 +12,6 @@ class Signup extends React.Component {
     
     await this.props.createUser(formData);
 
-    //if(this.props.error) this.setState({emailError: this.props.error.email})
     if(this.props.error) this.setState({error: {...this.props.error}})
     else this.props.history.push("/");
   }

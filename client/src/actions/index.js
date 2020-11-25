@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SIGN_OUT,FETCH_USER, CREATE_USER, FAILED_USER_CREATION, CHECK_USER, FETCH_PRODUCTS, ADD_TO_CART, REMOVE_FROM_CART, GET_CART, GET_WISHLIST, ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST, CHECKOUT, SHOW_RECEIPT, PURCHASE_HISTORY } from './types';
+import { SIGN_OUT, CREATE_USER, FAILED_USER_CREATION, CHECK_USER, FAILED_USER_LOGIN, FETCH_PRODUCTS, ADD_TO_CART, REMOVE_FROM_CART, GET_CART, GET_WISHLIST, ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST, CHECKOUT, SHOW_RECEIPT, PURCHASE_HISTORY } from './types';
 
 // User Action Creators
 export const signOut = () => {
@@ -9,25 +9,26 @@ export const signOut = () => {
   }
 }
 
-export const fetchUser = () => async dispatch => {
+/* export const fetchUser = () => async dispatch => {
     const response = await axios.get('/auth/current_user');
     dispatch({ type: FETCH_USER, payload: response.data});
-}
+} */
 
 export const checkUser = (user) => async dispatch => {
-  const userId = await axios.post('/auth/login', user);
+  let userId = '';
+  try {
+    userId = await axios.post('/auth/login', user);
+  } catch(err) {
+    return dispatch({ type: FAILED_USER_LOGIN, payload: err.response.data })
+  }
   dispatch({ type: CHECK_USER, payload: userId.data});    
 } 
 
 export const createUser = (user) => async dispatch => {
-  //await axios.post('/auth/signup', user);
-  //dispatch({ type: CREATE_USER, payload: user});
-  console.log('action creators file')
   let res = '';
   try {
     res = await axios.post('/auth/signup', user);
   } catch(err) {
-    console.log(err.response.data)
     return dispatch({ type: FAILED_USER_CREATION, payload: err.response.data});
   }
   dispatch({ type: CREATE_USER, payload: res.data});  

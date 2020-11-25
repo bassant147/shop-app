@@ -1,5 +1,4 @@
 import React from 'react';
-//import { Field, reduxForm } from 'redux-form';
 
 class LoginForm extends React.Component {
   state = { email: '', password: '' }
@@ -9,23 +8,21 @@ class LoginForm extends React.Component {
     this.props.onSubmit(this.state);
   }  
 
-  /* renderInput({ input, label}) {
-    return (
-      <div className="field">
-        <label>{label}</label>
-        <input {...input}/>
-      </div>
-    )
+  renderEmailError() {
+    let error = this.props.error;
+    if(error.email) 
+      return <span style={{'color': 'red', 'fontSize':'12px'}}>{error.email}</span>
+    
+    else return <span></span>
   }
 
-  render() {
-    return (
-      <form>
-        <Field name="email" component={this.renderInput} label="Email" className="validate" type="email"/>
-        <Field name="password" component={this.renderInput} label="Password" className="validate" type="password"/>
-      </form>
-    )
-  } */
+  renderPasswordError() {
+    let error = this.props.error;
+    if(error.password)
+      return <span style={{'color': 'red', 'fontSize':'12px'}}>{error.password}</span>
+    
+    else return <span></span>
+  }
 
   render() {
     return (
@@ -37,14 +34,27 @@ class LoginForm extends React.Component {
           <form onSubmit={this.onFormSubmit} className="col offset-s1 s12">
             <div className="row">
               <div className="input-field col s6">
-                <input placeholder="Email" id="email" type="email" className="validate" value={this.state.email} onChange={e => this.setState({ email: e.target.value })} />
+                <input placeholder="Email" 
+                      id="email" 
+                      type="email" 
+                      required
+                      className="validate" 
+                      value={this.state.email} 
+                      onChange={e => this.setState({ email: e.target.value })} />
+                {this.renderEmailError()}
               </div>
             </div>
             <div className="row">
               <div className="input-field col s6">
-                <input placeholder="Password" id="password" type="password" className="validate" value={this.state.password} 
-                onChange={e => this.setState({ password: e.target.value})}
+                <input placeholder="Password" 
+                      id="password" 
+                      type="password" 
+                      required
+                      className="validate" 
+                      value={this.state.password} 
+                      onChange={e => this.setState({ password: e.target.value})}
                 />
+                {this.renderPasswordError()}
               </div>
             </div>
             <div className="row">
@@ -57,7 +67,7 @@ class LoginForm extends React.Component {
           </form>
         </div>
         </div>
-        </div>
+      </div>
     )
   } 
 }
